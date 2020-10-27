@@ -7,7 +7,7 @@ const Forecast = () => {
   let [responseObj, setResponseObj] = useState({});
 
   function getForecast() {
-    fetch("https://rapidapi.p.rapidapi.com/weather?q=London%2Cuk&lat=0&lon=0&callback=test&id=2172797&lang=null&units=%22metric%22%20or%20%22imperial%22&mode=xml%2C%20html", {
+    fetch("https://rapidapi.p.rapidapi.com/weather?q=London", {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
@@ -18,6 +18,7 @@ const Forecast = () => {
   response.json())
 .then(response => {
   setResponseObj(response)
+  console.log(response)
   })
 .catch(err => {
 	console.error(err);
