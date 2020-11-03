@@ -9,24 +9,38 @@ const Forecast = () => {
   let [responseObj, setResponseObj] = useState({});
   let [city, setCity] = useState('');
   let [unit, setUnit] = useState('imperial');
+  let [error, setError] = useState(false);
+  let [loading, setLoading] = useState(false);
 
   const uriEncodedCity = encodeURIComponent(city);
 
   function getForecast(e) {
     e.preventDefault();
 
+    if (city.length === 0) {
+      return setError(true);
+    }
+
+    setError(false);
+    setResponseObj({});
+    setLoading(true);
+  
+  let uriEncodedCity = encodeURIComponent(city);
+
     fetch(`https://rapidapi.p.rapidapi.com/weather?units=${unit}&q=${uriEncodedCity}`, {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "community-open-weather-map.p.rapidapi.com",
-		"x-rapidapi-key": "0a157b1b2emsh1de672134471601p14a7e7jsn8ee1f917a58b"
+		"x-rapidapi-key": process.env.REACT_APP_API_KEY
 	}
 })
-.then(response =>
-  response.json())
+.then(response => response.json())
 .then(response => {
   setResponseObj(response)
   console.log(response)
+    if (response.cod !== 200) {
+      throw new Error()
+    }
   })
 .catch(err => {
 	console.error(err);
@@ -71,6 +85,8 @@ const Forecast = () => {
     </form>
       <Conditions
         responseObj={responseObj}
+        error = {error}
+        loading = {loading}
       />
     </div>
   )
