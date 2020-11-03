@@ -1,12 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
+import Logo from './components/logo/Logo'
 import './App.css';
 import Forecast from './components/forecast/Forecast'
+
 
 function App() {
   return (
     <div className="App">
       <header className='App-header'>
+      <Logo />
         <h1>
           React Weather App
         </h1>
