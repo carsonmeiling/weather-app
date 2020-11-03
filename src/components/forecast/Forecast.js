@@ -1,6 +1,7 @@
 import React, { useState, Component } from 'react';
 import axios from 'axios';
-import Conditions from '../conditions/Conditions'
+import Conditions from '../conditions/Conditions';
+import classes from './Forecast.module.css';
 
 
 const Forecast = () => {
@@ -13,7 +14,7 @@ const Forecast = () => {
 
   function getForecast(e) {
     e.preventDefault();
-    
+
     fetch(`https://rapidapi.p.rapidapi.com/weather?units=${unit}&q=${uriEncodedCity}`, {
 	"method": "GET",
 	"headers": {
@@ -40,19 +41,21 @@ const Forecast = () => {
           placeholder="Enter City"
           maxLength="50"
           value={city}
+          className = {classes.textInput}
           onChange={(e) => setCity(e.target.value)}
         />
-        <label>
+        <label className = {classes.Radio}>
           <input
             type="radio"
             name="units"
             checked={unit === "imperial"}
             value="imperial"
+
             onChange={(e) => setUnit(e.target.value)}
           />
             Fahrenheit
         </label>
-        <label>
+        <label className = {classes.Radio}>
           <input
             type="radio"
             name="units"
@@ -62,7 +65,9 @@ const Forecast = () => {
           />
             Celcius
         </label>
-        <button type="submit">Get Forecast</button>
+        <button 
+          className = {classes.Button}
+          type="submit">Get Forecast</button>
     </form>
       <Conditions
         responseObj={responseObj}
