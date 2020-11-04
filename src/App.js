@@ -10,7 +10,7 @@ function App() {
       <header className='App-header'>
       <Logo />
         <h1>
-          React Weather App
+          Weather App
         </h1>
       </header>
       <main>

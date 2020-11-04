@@ -37,13 +37,16 @@ const Forecast = () => {
 .then(response => response.json())
 .then(response => {
   setResponseObj(response)
+  setLoading(false)
   console.log(response)
     if (response.cod !== 200) {
       throw new Error()
     }
   })
 .catch(err => {
-	console.error(err);
+  console.error(err);
+  setError(true)
+  setLoading(false)
 });
   }
   return (
